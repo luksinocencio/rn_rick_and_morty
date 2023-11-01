@@ -7,6 +7,7 @@ export const styles = StyleSheet.create({
     marginVertical: 5,
     backgroundColor: '#fff',
     flexDirection: 'row',
+    alignItems: 'center',
   },
   titleText: {
     fontSize: 16,
@@ -27,5 +28,6 @@ export const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
     paddingHorizontal: 10,
+    flex: 1,
   },
 })

@@ -7,6 +7,7 @@ import { FlatList } from 'react-native'
 import { api } from '../../services/api'
 import { CharacterDetailProps } from '../../types/CharacterDetailProps'
 import LoadImage from './../../assets/img/loading.jpg'
+import { CharacterDetailEpisodeItem } from './components/CharacterDetailEpisodeItem'
 
 export function CharacterDetailScreen({ route, navigation }: any) {
   const [characterDetail, setCharacterDetail] = useState<CharacterDetailProps>(
@@ -52,22 +53,6 @@ export function CharacterDetailScreen({ route, navigation }: any) {
           contentContainerStyle={{ paddingBottom: 40 }}
         />
       </View>
-    </View>
-  )
-}
-
-function CharacterDetailEpisodeItem(item: string) {
-  return (
-    <View
-      style={{
-        width: '100%',
-        padding: 10,
-        backgroundColor: '#eee',
-        marginVertical: 5,
-        borderRadius: 10,
-        elevation: 3,
-      }}>
-      <CustomText>{item}</CustomText>
     </View>
   )
 }

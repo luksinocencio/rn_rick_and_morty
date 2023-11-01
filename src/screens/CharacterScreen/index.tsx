@@ -5,8 +5,11 @@ import { api } from '../../services/api'
 import { ListItem } from './components/ListItem'
 import { styles } from './styles'
 import { CharacterProps } from '../../types/CharacterProps'
+import { useNavigation } from '@react-navigation/native'
+import { AppNavigatorRoutesProps } from '../../routes'
 
 export function CharacterScreen() {
+  const navigation = useNavigation<AppNavigatorRoutesProps>()
   const [characters, setCharacters] = useState<CharacterProps[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [currentPage, setCurrentPage] = useState<number>(1)
@@ -52,6 +55,13 @@ export function CharacterScreen() {
     })
   }, [filterTextInput, characters])
 
+  function navigateToDetail({ id, name }: CharacterProps) {
+    navigation.navigate('characterDetail', {
+      id: id,
+      name: name,
+    })
+  }
+
   return (
     <View style={styles.container}>
       <TextInput
@@ -61,7 +71,15 @@ export function CharacterScreen() {
       />
       <FlatList
         data={charactersFilter}
-        renderItem={({ item }) => ListItem(item)}
+        renderItem={({ item }: CharacterProps) => (
+          <ListItem
+            name={item.name}
+            image={item.image}
+            status={item.status}
+            species={item.species}
+            onPress={() => navigateToDetail(item)}
+          />
+        )}
         keyExtractor={({ id }: CharacterProps, index) => String(id + index)}
         ListFooterComponent={<LoadingView loading={hasMoreData} />}
         onEndReached={getCharacters}

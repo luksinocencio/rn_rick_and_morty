@@ -1,11 +1,22 @@
 import * as React from 'react'
-import { View, Text, Image } from 'react-native'
+import { View, Text, Image, TouchableOpacity } from 'react-native'
 import { styles } from './styles'
 import { CharacterProps } from '../../../../types/CharacterProps'
+import Icon from 'react-native-vector-icons/MaterialIcons'
 
-export function ListItem({ name, status, species, image }: CharacterProps) {
+type ListItemProps = CharacterProps & {
+  onPress: () => void
+}
+
+export function ListItem({
+  name,
+  status,
+  species,
+  image,
+  onPress,
+}: ListItemProps) {
   return (
-    <View style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={onPress}>
       <Image
         source={{ uri: image }}
         style={styles.imageStyle}
@@ -16,6 +27,7 @@ export function ListItem({ name, status, species, image }: CharacterProps) {
         <Text style={styles.descriptionText}>{`Status: ${status}`}</Text>
         <Text style={styles.descriptionText}>{`Especie: ${species}`}</Text>
       </View>
-    </View>
+      <Icon name="arrow-right" size={32} color={'#000'} />
+    </TouchableOpacity>
   )
 }
